@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: '8.0.x'
 
     - name: Restore
-      run: dotnet restore src/GuardEscapePlugin.csproj
+      run: dotnet restore src/GuardEscapeToMTF.csproj
 
     - name: Build
-      run: dotnet build src/GuardEscapePlugin.csproj -c Release
+      run: dotnet build src/GuardEscapeToMTF.csproj -c Release
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: GuardEscapePlugin
-        path: src/bin/Release/netstandard2.0/GuardEscapePlugin.dll
+        name: GuardEscapeToMTF
+        path: src/bin/Release/netstandard2.0/GuardEscapeToMTF.dll
