@@ -1,29 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>GuardEscapeToMTF</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Unity / 游戏 DLL（你解压的 Libraries.zip） -->
+    <Reference Include="UnityEngine">
+      <HintPath>libs/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
     <Reference Include="Assembly-CSharp">
-      <HintPath>../Libraries/Assembly-CSharp.dll</HintPath>
+      <HintPath>libs/Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
     </Reference>
 
     <Reference Include="Mirror">
-      <HintPath>../Libraries/Mirror.dll</HintPath>
-    </Reference>
-
-    <Reference Include="UnityEngine">
-      <HintPath>../Libraries/UnityEngine.dll</HintPath>
-    </Reference>
-
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>../Libraries/UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>libs/Mirror.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 
 </Project>
-
-
