@@ -1,31 +1,30 @@
-name: Build Plugin
+
+name: Build SCP Plugin
 
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
+  pull_request:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
 
-    - name: Restore
-      run: dotnet restore src/GuardEscapeToMTF.csproj
+    - name: Restore NuGet (safe)
+      run: nuget restore src/GuardEscapeToMTF.csproj
 
-    - name: Build
-      run: dotnet build src/GuardEscapeToMTF.csproj -c Release
+    - name: Build plugin
+      run: msbuild src/GuardEscapeToMTF.csproj /p:Configuration=Release
 
-    - name: Upload Artifact
+    - name: Upload DLL
       uses: actions/upload-artifact@v4
       with:
         name: GuardEscapeToMTF
-        path: src/bin/Release/netstandard2.0/GuardEscapeToMTF.dll
+        path: src/bin/Release/net472/*.dll
